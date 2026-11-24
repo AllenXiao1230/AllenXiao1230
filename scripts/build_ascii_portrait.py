@@ -4,6 +4,7 @@ from __future__ import annotations
 import json
 import base64
 import html
+import math
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -34,12 +35,33 @@ def sample_ascii(image, box, columns):
     if not tones:raise ValueError('No foreground pixels in portrait crop.')
     low=tones[int(len(tones)*.02)]
     high=tones[min(len(tones)-1,int(len(tones)*.97))]
+    # Rebalance facial midtones independently of the black hair and white shirt.
+    # This changes character selection only; the transparent source is untouched.
+    face_tones=[]
+    for row,line in enumerate(samples):
+        source_y=top+(row+.5)*(bottom-top)/rows
+        for col,(a,luma) in enumerate(line):
+            source_x=left+(col+.5)*(right-left)/columns
+            if a>.7 and .235*width<source_x<.56*width and .15*height<source_y<.35*height:
+                face_tones.append(luma)
+    face_tones.sort()
+    face_low=face_tones[int(len(face_tones)*.04)] if face_tones else low
+    face_high=face_tones[min(len(face_tones)-1,int(len(face_tones)*.96))] if face_tones else high
     result=[]
-    for line in samples:
+    for row,line in enumerate(samples):
         out=[]
-        for a,luma in line:
+        source_y=top+(row+.5)*(bottom-top)/rows
+        for col,(a,luma) in enumerate(line):
             if a<.72:out.append(' ');continue
+            source_x=left+(col+.5)*(right-left)/columns
+            face_weight=math.exp(-.5*(((source_x-.395*width)/(.16*width))**2+((source_y-.255*height)/(.105*height))**2))
+            neighbors=[samples[rr][cc][1] for rr in range(max(0,row-2),min(rows,row+3)) for cc in range(max(0,col-2),min(columns,col+3)) if samples[rr][cc][0]>.7]
+            local_mean=sum(neighbors)/len(neighbors) if neighbors else luma
+            detail=luma-local_mean
+            facial_luma=max(0,min(255,luma+1.15*detail))
             darkness=max(0,min(1,(high-luma)/max(1,high-low)))**1.35
+            facial_darkness=max(0,min(1,(face_high-facial_luma)/max(1,face_high-face_low)))**1.65
+            darkness=darkness*(1-face_weight)+facial_darkness*face_weight
             index=max(1,round(darkness*(len(RAMP)-1)))
             out.append(RAMP[index])
         result.append(''.join(out))
@@ -53,9 +75,9 @@ def main():
     alpha=image.getchannel('A')
     if alpha.getextrema()[0]>0:raise ValueError('The cutout must have genuinely transparent background pixels.')
     # Framing is relative to the generated transparent cutout, not the original wall.
-    desktop=(140/1024,10/1536,820/1024,860/1536)
-    mobile=(150/1024,10/1536,690/1024,550/1536)
-    result={'source':source.name,'method':'Alpha-aware luminance sampling into printable ASCII text. Transparent pixels become spaces.','ramp':RAMP,
+    desktop=(170/1024,15/1536,690/1024,665/1536)
+    mobile=(170/1024,25/1536,680/1024,535/1536)
+    result={'source':source.name,'method':'Alpha-aware printable ASCII with face-focused framing, local detail enhancement and smoothly blended facial midtone normalization. Transparent pixels become spaces.','ramp':RAMP,
             'desktop':sample_ascii(image,desktop,128),'mobile':sample_ascii(image,mobile,96)}
     target=ROOT/'data/portrait-ascii.json'
     target.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n','utf-8')
