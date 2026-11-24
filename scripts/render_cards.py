@@ -15,8 +15,14 @@ from datetime import date, timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-C = {"paper": "#F5F2EB", "white": "#FFFEFA", "ink": "#252721", "muted": "#64665D", "line": "#DDDCD3", "blue": "#254BDD", "red": "#BD3C2D", "yellow": "#F0C84B"}
-HEAT = ["#E4E7EC", "#C1CEF9", "#89A3F3", "#4D74E7", C["blue"]]
+C = {
+    "surface": "#0B1423", "surface_alt": "#101D31", "text": "#E8F1FF",
+    "muted": "#A1B4CF", "line": "#263A56", "blue": "#71B0FF",
+    "cyan": "#68E3DE", "mint": "#A4E6BE", "portrait": "#A7DFF1",
+    "bar": "#5B7A9E", "tile_blue": "#142F52", "tile_cyan": "#10363C",
+    "tile_mint": "#15372F"
+}
+HEAT = ["#1A2B43", "#386B91", "#3A9BC6", "#43C9D6", "#7DEAE8"]
 LANG = "en"
 TRANSLATIONS = json.loads((ROOT / "locales.json").read_text("utf-8"))
 
@@ -50,7 +56,7 @@ def text(x, y, value, size=16, fill=None, family="sans", weight=400, **attrs):
     value=t(value)
     family = "ProfileSerif" if family == "serif" and not re.search(r"[\u3000-\u9fff]",value) else "ProfileSans, ProfileHan"
     extra = " ".join(f'{k.replace("_", "-")}="{esc(v)}"' for k, v in attrs.items())
-    return f'<text x="{x}" y="{y}" font-family="{family}" font-size="{size}" font-weight="{weight}" fill="{fill or C["ink"]}" {extra}>{esc(value)}</text>'
+    return f'<text x="{x}" y="{y}" font-family="{family}" font-size="{size}" font-weight="{weight}" fill="{fill or C["text"]}" {extra}>{esc(value)}</text>'
 
 
 def rect(x, y, w, h, fill, rx=0, **attrs):
@@ -91,7 +97,7 @@ def font_css(include_han=False):
     return "".join(css)
 
 
-def svg(w, h, body, title, static=False, bg="paper"):
+def svg(w, h, body, title, static=False, bg="surface"):
     motion = "" if static else """
       @keyframes printin{from{opacity:.4;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
       @keyframes grow{from{transform:scaleY(.02)}to{transform:scaleY(1)}}
@@ -121,7 +127,7 @@ def hero(config, mobile, static):
         portrait=json.loads(source.read_text('utf-8'))['mobile' if mobile else 'desktop']
         px,py,pw,ph=(252,18,140,140) if mobile else (555,16,294,340)
         line_height=ph/len(portrait['rows'])
-        body+='<g class="ascii-portrait" aria-label="ASCII portrait of Allen" fill="#161812">'
+        body+='<g class="ascii-portrait" aria-label="ASCII portrait of Allen" fill="'+C['portrait']+'">'
         for index,line in enumerate(portrait['rows']):
             if not line.strip():continue
             body+=f'<text class="ascii-row" style="--row:{index}" x="{px}" y="{py+(index+.82)*line_height:.3f}" font-family="ProfileMono,monospace" font-weight="600" font-size="{line_height:.3f}" textLength="{pw}" lengthAdjust="spacingAndGlyphs" xml:space="preserve">{esc(line)}</text>'
@@ -136,10 +142,10 @@ def hero(config, mobile, static):
         body+=f'<g class="print" style="--delay:.2s" clip-path="url(#portrait-clip)"><svg x="{px}" y="{py}" width="{pw}" height="{ph}" viewBox="{crop}" preserveAspectRatio="xMidYMid slice"><image width="1045" height="1567" href="data:image/jpeg;base64,{encoded}"/></svg></g>'
     elif not mobile:
         spokes = ''.join(f'<rect x="-11" y="-83" width="22" height="166" rx="2" transform="rotate({angle})"/>' for angle in (0,45,90,135))
-        body += f'<g transform="translate(740 154)"><g class="turn" fill="{C["blue"]}">{spokes}</g><circle cx="0" cy="0" r="16" fill="{C["paper"]}"/></g>'
-        body += rect(793,258,18,18,C["yellow"],2) + f'<circle cx="828" cy="267" r="7" fill="{C["red"]}"/>'
+        body += f'<g transform="translate(740 154)"><g class="turn" fill="{C["blue"]}">{spokes}</g><circle cx="0" cy="0" r="16" fill="{C["surface"]}"/></g>'
+        body += rect(793,258,18,18,C["mint"],2) + f'<circle cx="828" cy="267" r="7" fill="{C["cyan"]}"/>'
     else:
-        body += f'<circle cx="350" cy="68" r="9" fill="{C["red"]}"/>' + rect(367,87,17,17,C["yellow"],1)
+        body += f'<circle cx="350" cy="68" r="9" fill="{C["cyan"]}"/>' + rect(367,87,17,17,C["mint"],1)
     ty = 278 if mobile else 285
     for i,line in enumerate(config["tagline"]):
         body += text(x,ty+i*26,line,18 if mobile else 20)
@@ -226,21 +232,21 @@ def activity(data,st,mobile,static):
     for i,(month,count) in enumerate(months):
         px=gx+i*pitch+(pitch-bw)/2
         bh=max(2,round(height*count/max(peak,1),2))
-        color=C["blue"] if month==best else "#B1B4AA"
+        color=C["cyan"] if month==best else C["bar"]
         body += rect(round(px,2),base-bh,round(bw,2),bh,color,2,**{"class":"bar","style":f"--delay:{.5+i*.035:.3f}s"})
         label=(str(int(month[5:])) if mobile else str(int(month[5:]))+'月') if LANG=='zh-TW' else (calendar.month_abbr[int(month[5:])][0] if mobile else calendar.month_abbr[int(month[5:])])
         body += text(round(px+bw/2,2),base+21,label,10,C["muted"],text_anchor="middle")
-        body += text(round(px+bw/2,2),base-bh-9,str(count),9 if mobile else 10,C["blue"] if month==best else C["muted"],text_anchor="middle")
+        body += text(round(px+bw/2,2),base-bh-9,str(count),9 if mobile else 10,C["cyan"] if month==best else C["muted"],text_anchor="middle")
     if not mobile and best:
         bd=date.fromisoformat(best+"-01")
-        body += text(715,210,f'{bd:%b %Y}',19,C["blue"]) + text(715,234,"Busiest month",12,C["muted"])
+        body += text(715,210,f'{bd:%b %Y}',19,C["cyan"]) + text(715,234,"Busiest month",12,C["muted"])
     body += text(28,335 if mobile else 276,"Monthly contributions / first & last months are partial",10 if mobile else 11,C["muted"])
     return svg(w,h,body,f'Contributions by month. {st["active"]} active days, longest streak {st["longest"]} days, current streak {st["current"]} days. First and last months are partial.',static)
 
 
 def tile(item,mobile,static,index):
     w,h=(160,150) if mobile else (284,210)
-    fg=C["ink"] if item["color"]=="yellow" else "#FFFFFF"
+    fg=C[item["color"]]
     x=16 if mobile else 24
     body='<g class="print" style="--delay:'+str(.7+index*.12)+'s">'
     body+=text(x,43 if mobile else 52,item["title"],27 if mobile else 39,fg,family="serif")
@@ -249,7 +255,7 @@ def tile(item,mobile,static,index):
     body+=icon(item["icon"],x,88 if mobile else 143,fg,.85 if mobile else 1)
     body+=arrow(w-33,112 if mobile else 172,fg)
     body+='</g>'
-    return svg(w,h,body,item["title"]+" "+" ".join(item["lines"]),static,bg=item["color"])
+    return svg(w,h,body,item["title"]+" "+" ".join(item["lines"]),static,bg='tile_'+item["color"])
 
 
 def project(p,mobile,static,index):
@@ -264,7 +270,7 @@ def project(p,mobile,static,index):
     if not mobile:body+=icon(p["icon"],788,37,C[p["color"]],1.2)
     body+=arrow(w-40,174 if mobile else 124,C[p["color"]])
     body+='</g>'
-    return svg(w,h,body,p["title"]+". "+t(p["description"])+" "+p["stack"]+". "+t(p["note"]),static,bg="white")
+    return svg(w,h,body,p["title"]+". "+t(p["description"])+" "+p["stack"]+". "+t(p["note"]),static,bg="surface_alt")
 
 
 def footer(mobile,static):
@@ -308,7 +314,7 @@ def write_readme(config,data,st,out):
     preview=markdown.replace('## '+selected,'<h2>'+selected+'</h2>').replace('### '+photography,f'<h3 id="{anchor}">{photography}</h3>').replace('### '+web,'<h3>'+esc(web)+'</h3>')
     preview=preview.replace('./README.en.md','./preview.en.html').replace('./README.md','./preview.html')
     (out/('preview.html' if zh else 'preview.en.html')).write_text(f'''<!doctype html><html lang="{LANG}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Allen is coding — README preview</title><style>
-      *{{box-sizing:border-box}}body{{margin:0;background:#fff;color:{C['ink']};font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}}main{{max-width:944px;margin:32px auto;padding:0 32px 32px}}img{{max-width:100%;height:auto;vertical-align:middle}}main>picture,main>a{{display:block;margin-bottom:16px}}main>picture>img,main>a>picture>img{{width:100%}}p[align]{{display:flex;align-items:start;justify-content:space-between;gap:12px;margin:20px 0 42px}}p[align]>a{{display:block;width:32%;flex:1}}p[align] img{{width:100%}}a{{color:{C['blue']};text-underline-offset:.2em}}a:focus-visible{{outline:3px solid {C['blue']};outline-offset:5px;border-radius:14px}}h2{{font-size:24px;margin:40px 0 24px;border-bottom:1px solid #ddd;padding-bottom:10px}}h3{{font-size:17px;font-weight:600;margin:32px 0 16px}}sub{{font-size:11px;color:{C['muted']}}}::selection{{background:#D4DEFF}}@media(max-width:600px){{main{{padding:0 16px 24px;margin:16px auto}}p[align]{{gap:8px;margin:16px 0 32px}}h2{{margin-top:28px}}}}@media(prefers-color-scheme:dark){{body{{background:#0d1117;color:#e6edf3}}h2{{border-color:#30363d}}sub{{color:#9198a1}}a{{color:#9DB1FF}}}}
+      *{{box-sizing:border-box}}body{{margin:0;background:#fff;color:#202D43;font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}}main{{max-width:944px;margin:32px auto;padding:0 32px 32px}}img{{max-width:100%;height:auto;vertical-align:middle}}main>picture,main>a{{display:block;margin-bottom:16px}}main>picture>img,main>a>picture>img{{width:100%}}p[align]{{display:flex;align-items:start;justify-content:space-between;gap:12px;margin:20px 0 42px}}p[align]>a{{display:block;width:32%;flex:1}}p[align] img{{width:100%}}a{{color:#2164BB;text-underline-offset:.2em}}a:focus-visible{{outline:3px solid #2164BB;outline-offset:5px;border-radius:14px}}h2{{font-size:24px;margin:40px 0 24px;border-bottom:1px solid #D8E4F2;padding-bottom:10px}}h3{{font-size:17px;font-weight:600;margin:32px 0 16px}}sub{{font-size:11px;color:#58708E}}::selection{{background:#163D61;color:#E8F1FF}}@media(max-width:600px){{main{{padding:0 16px 24px;margin:16px auto}}p[align]{{gap:8px;margin:16px 0 32px}}h2{{margin-top:28px}}}}@media(prefers-color-scheme:dark){{body{{background:#060B14;color:#E8F1FF}}h2{{border-color:#263A56}}sub{{color:#A1B4CF}}a{{color:#71B0FF}}a:focus-visible{{outline-color:#71B0FF}}}}
     </style></head><body><main>{preview}</main></body></html>''','utf-8')
 
 

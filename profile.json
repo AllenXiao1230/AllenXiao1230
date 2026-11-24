@@ -4,7 +4,10 @@
   "headline": "is coding.",
   "location": "Taiwan",
   "portrait_ascii": "data/portrait-ascii.json",
-  "tagline": ["Web experiences, photography tools", "and experiments in between."],
+  "tagline": [
+    "Web experiences, photography tools",
+    "and experiments in between."
+  ],
   "skills": "Python / TypeScript / React / Vue / Rust",
   "projects": [
     {
@@ -15,7 +18,7 @@
       "note": "Hardware-backed alpha",
       "group": "photography",
       "icon": "camera",
-      "color": "red"
+      "color": "cyan"
     },
     {
       "slug": "Cadris",
@@ -25,7 +28,7 @@
       "note": "Local-first photo workflow",
       "group": "photography",
       "icon": "frame",
-      "color": "red"
+      "color": "cyan"
     },
     {
       "slug": "veyra",
@@ -59,8 +62,35 @@
     }
   ],
   "tiles": [
-    {"title": "Build.", "lines": ["Web & interfaces.", "From page to experience."], "target": "rocafa_2026", "color": "blue", "icon": "browser"},
-    {"title": "Capture.", "lines": ["Photography, in code.", "Recipes & photo workflows."], "target": "#photography-tools", "color": "red", "icon": "camera"},
-    {"title": "Automate.", "lines": ["Small tools. Less friction.", "Cameras, events & utilities."], "target": "veyra", "color": "yellow", "icon": "motion"}
+    {
+      "title": "Build.",
+      "lines": [
+        "Web & interfaces.",
+        "From page to experience."
+      ],
+      "target": "rocafa_2026",
+      "color": "blue",
+      "icon": "browser"
+    },
+    {
+      "title": "Capture.",
+      "lines": [
+        "Photography, in code.",
+        "Recipes & photo workflows."
+      ],
+      "target": "#photography-tools",
+      "color": "cyan",
+      "icon": "camera"
+    },
+    {
+      "title": "Automate.",
+      "lines": [
+        "Small tools. Less friction.",
+        "Cameras, events & utilities."
+      ],
+      "target": "veyra",
+      "color": "mint",
+      "icon": "motion"
+    }
   ]
 }
