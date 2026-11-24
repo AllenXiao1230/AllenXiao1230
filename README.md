@@ -7,12 +7,12 @@
 
 <picture>
   <source media="(max-width: 600px)" srcset="./cards/zh-TW/calendar-mobile.svg">
-  <img src="./cards/zh-TW/calendar.svg" width="100%" alt="2025-11-25 至 2026-11-24，共 247 次 GitHub 貢獻。">
+  <img src="./cards/zh-TW/calendar.svg" width="100%" alt="2025-11-25 至 2026-11-24，共 254 次 GitHub 貢獻。">
 </picture>
 
 <picture>
   <source media="(max-width: 600px)" srcset="./cards/zh-TW/activity-mobile.svg">
-  <img src="./cards/zh-TW/activity.svg" width="100%" alt="39 個活躍日；最長連續 7 天；目前連續 0 天。">
+  <img src="./cards/zh-TW/activity.svg" width="100%" alt="41 個活躍日；最長連續 7 天；目前連續 1 天。">
 </picture>
 
 <p align="center">

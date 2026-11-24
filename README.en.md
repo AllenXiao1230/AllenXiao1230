@@ -7,12 +7,12 @@
 
 <picture>
   <source media="(max-width: 600px)" srcset="./cards/en/calendar-mobile.svg">
-  <img src="./cards/en/calendar.svg" width="100%" alt="247 contributions from 2025-11-25 to 2026-11-24.">
+  <img src="./cards/en/calendar.svg" width="100%" alt="254 contributions from 2025-11-25 to 2026-11-24.">
 </picture>
 
 <picture>
   <source media="(max-width: 600px)" srcset="./cards/en/activity-mobile.svg">
-  <img src="./cards/en/activity.svg" width="100%" alt="39 active days. Longest streak: 7 days. Current streak: 0 days.">
+  <img src="./cards/en/activity.svg" width="100%" alt="41 active days. Longest streak: 7 days. Current streak: 1 days.">
 </picture>
 
 <p align="center">
