@@ -7,7 +7,7 @@
 
 <picture>
   <source media="(max-width: 600px)" srcset="./cards/zh-TW/calendar-mobile.svg">
-  <img src="./cards/zh-TW/calendar.svg" width="100%" alt="2025-11-25 至 2026-11-24，共 254 次 GitHub 貢獻。">
+  <img src="./cards/zh-TW/calendar.svg" width="100%" alt="2025-11-25 至 2026-11-24，共 255 次 GitHub 貢獻。">
 </picture>
 
 <picture>

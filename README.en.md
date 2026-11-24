@@ -7,7 +7,7 @@
 
 <picture>
   <source media="(max-width: 600px)" srcset="./cards/en/calendar-mobile.svg">
-  <img src="./cards/en/calendar.svg" width="100%" alt="254 contributions from 2025-11-25 to 2026-11-24.">
+  <img src="./cards/en/calendar.svg" width="100%" alt="255 contributions from 2025-11-25 to 2026-11-24.">
 </picture>
 
 <picture>
