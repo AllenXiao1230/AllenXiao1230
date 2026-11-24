@@ -1,0 +1,66 @@
+{
+  "username": "AllenXiao1230",
+  "name": "Allen",
+  "headline": "is coding.",
+  "location": "Taiwan",
+  "portrait_ascii": "data/portrait-ascii.json",
+  "tagline": ["Web experiences, photography tools", "and experiments in between."],
+  "skills": "Python / TypeScript / React / Vue / Rust",
+  "projects": [
+    {
+      "slug": "fuji-recipe-manager",
+      "title": "Fuji Recipe Manager",
+      "description": "A local-first workspace for Fujifilm film-simulation recipes.",
+      "stack": "Tauri / React / TypeScript / Rust",
+      "note": "Hardware-backed alpha",
+      "group": "photography",
+      "icon": "camera",
+      "color": "red"
+    },
+    {
+      "slug": "Cadris",
+      "title": "Cadris",
+      "description": "Keyboard-first photo culling. Find the frames worth keeping.",
+      "stack": "Tauri / React / TypeScript / Rust",
+      "note": "Local-first photo workflow",
+      "group": "photography",
+      "icon": "frame",
+      "color": "red"
+    },
+    {
+      "slug": "veyra",
+      "title": "Veyra",
+      "description": "Camera monitoring, motion events, recording and health checks.",
+      "stack": "Python / JavaScript / FFmpeg",
+      "note": "Camera monitoring",
+      "group": "web",
+      "icon": "motion",
+      "color": "blue"
+    },
+    {
+      "slug": "rocafa_2026",
+      "title": "ROCAFA 2026",
+      "description": "An event website for the 2026 academy evening.",
+      "stack": "HTML / CSS / JavaScript",
+      "note": "Event website",
+      "group": "web",
+      "icon": "browser",
+      "color": "blue"
+    },
+    {
+      "slug": "motion_detection_cctv",
+      "title": "Motion Detection CCTV",
+      "description": "Camera-based motion detection with keyboard controls.",
+      "stack": "Python",
+      "note": "Automation experiment",
+      "group": "web",
+      "icon": "motion",
+      "color": "blue"
+    }
+  ],
+  "tiles": [
+    {"title": "Build.", "lines": ["Web & interfaces.", "From page to experience."], "target": "rocafa_2026", "color": "blue", "icon": "browser"},
+    {"title": "Capture.", "lines": ["Photography, in code.", "Recipes & photo workflows."], "target": "#photography-tools", "color": "red", "icon": "camera"},
+    {"title": "Automate.", "lines": ["Small tools. Less friction.", "Cameras, events & utilities."], "target": "veyra", "color": "yellow", "icon": "motion"}
+  ]
+}

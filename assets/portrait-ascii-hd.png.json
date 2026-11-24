@@ -1,0 +1,9 @@
+{
+  "origin": "Browser capture of native SVG ASCII text sampled from the user portrait after background extraction.",
+  "source": "profile-readme/assets/portrait-ascii.svg",
+  "pixels": {
+    "width": 1920,
+    "height": 2280
+  },
+  "deviceScaleFactor": 2
+}

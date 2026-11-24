@@ -1,0 +1,6 @@
+{
+  "origin": "User-supplied portrait, edited with the built-in image_gen tool for background extraction on 2026-11-24.",
+  "source": "portrait.jpeg",
+  "alpha": "Actual RGBA transparency; transparent background samples become spaces in the ASCII conversion.",
+  "usage": "Only source material for native SVG text. The README hero displays ASCII characters, not this bitmap."
+}

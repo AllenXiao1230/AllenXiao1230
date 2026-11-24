@@ -1,0 +1,9 @@
+{
+  "origin": "Browser capture of the authored README SVG assets, rendered with --static",
+  "source": "preview.html",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "note": "Shows the final animation frame. Original animated SVG files are included."
+}
