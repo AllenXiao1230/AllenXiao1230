@@ -7,7 +7,7 @@
 
 <picture>
   <source media="(max-width: 600px)" srcset="./cards/en/calendar-mobile.svg">
-  <img src="./cards/en/calendar.svg" width="100%" alt="255 contributions from 2025-11-25 to 2026-11-24.">
+  <img src="./cards/en/calendar.svg" width="100%" alt="256 contributions from 2025-11-26 to 2026-11-25.">
 </picture>
 
 <picture>
@@ -78,4 +78,4 @@
 </picture>
 </a>
 
-<sub>Contribution snapshot: 2026-11-24 · Public GitHub calendar · Refreshed daily with GitHub Actions.</sub>
+<sub>Contribution snapshot: 2026-11-25 · Public GitHub calendar · Refreshed daily with GitHub Actions.</sub>
