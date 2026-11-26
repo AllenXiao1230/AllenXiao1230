@@ -7,12 +7,12 @@
 
 <picture>
   <source media="(max-width: 600px)" srcset="./cards/en/calendar-mobile.svg">
-  <img src="./cards/en/calendar.svg" width="100%" alt="256 contributions from 2025-11-26 to 2026-11-25.">
+  <img src="./cards/en/calendar.svg" width="100%" alt="256 contributions from 2025-11-27 to 2026-11-26.">
 </picture>
 
 <picture>
   <source media="(max-width: 600px)" srcset="./cards/en/activity-mobile.svg">
-  <img src="./cards/en/activity.svg" width="100%" alt="41 active days. Longest streak: 7 days. Current streak: 1 days.">
+  <img src="./cards/en/activity.svg" width="100%" alt="41 active days. Longest streak: 7 days. Current streak: 0 days.">
 </picture>
 
 <p align="center">
@@ -78,4 +78,4 @@
 </picture>
 </a>
 
-<sub>Contribution snapshot: 2026-11-25 · Public GitHub calendar · Refreshed daily with GitHub Actions.</sub>
+<sub>Contribution snapshot: 2026-11-26 · Public GitHub calendar · Refreshed daily with GitHub Actions.</sub>
