@@ -1,15 +1,10 @@
 {
   "username": "AllenXiao1230",
   "source": "https://github.com/users/AllenXiao1230/contributions",
-  "fetched_at": "2026-11-26T05:14:01+00:00",
-  "from": "2025-11-27",
-  "to": "2026-11-26",
+  "fetched_at": "2026-11-27T05:11:59+00:00",
+  "from": "2025-11-28",
+  "to": "2026-11-27",
   "days": [
-    {
-      "date": "2025-11-27",
-      "level": 0,
-      "count": 0
-    },
     {
       "date": "2025-11-28",
       "level": 0,
@@ -1827,6 +1822,11 @@
     },
     {
       "date": "2026-11-26",
+      "level": 0,
+      "count": 0
+    },
+    {
+      "date": "2026-11-27",
       "level": 0,
       "count": 0
     }
