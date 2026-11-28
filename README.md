@@ -7,7 +7,7 @@
 
 <picture>
   <source media="(max-width: 600px)" srcset="./cards/zh-TW/calendar-mobile.svg">
-  <img src="./cards/zh-TW/calendar.svg" width="100%" alt="2025-11-28 至 2026-11-27，共 256 次 GitHub 貢獻。">
+  <img src="./cards/zh-TW/calendar.svg" width="100%" alt="2025-11-29 至 2026-11-28，共 256 次 GitHub 貢獻。">
 </picture>
 
 <picture>
@@ -78,4 +78,4 @@
 </picture>
 </a>
 
-<sub>貢獻資料日期：2026-11-27 · GitHub 公開貢獻紀錄 · 由 GitHub Actions 每日更新。</sub>
+<sub>貢獻資料日期：2026-11-28 · GitHub 公開貢獻紀錄 · 由 GitHub Actions 每日更新。</sub>
